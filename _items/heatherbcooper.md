@@ -8,7 +8,11 @@ website: https://heatherbcooper.substack.com/
 layout: item
 dofollow: false
 trending: false
-shortdescription: Weekly generative AI insights.
+shortdescription: Your weekly dose of AI news, tools, and innovation with a visual twist. Breaking down barriers to make AI content creation accessible to all.
 ---
+Your weekly dose of AI news, tools, and innovation with a visual twist. Breaking down barriers to make AI content creation accessible to all.
+
+By Heather Cooper • Visually AI Newsletter · Over 8,000 subscribers
+
 Written by an AI educator and consultant, Visually AI serves 9,000+ subscribers with weekly updates on generative AI developments. The newsletter covers new tools, effective prompts, and industry updates, providing practical insights for those interested in visual AI applications and generative technologies.
 
