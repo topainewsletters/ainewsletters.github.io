@@ -7,61 +7,34 @@ archive: false
 ---
 {% include items-header.html %}
 
-<!-- This page forms layout for individual category pages. For example: ai-tools/category/email-writing  -->
-
-<!--<div class="row listrecent d-flex align-items-center justify-content-center">-->
 <div class="container">
     <div class="row">
         <div class="col text-center text-highlight">
             {% assign toolCategory = page.display_name %}
             {% if toolCategory != null %}
-                <h1>Trending AI tools for {{ page.display_name }}</h1>
-                <h2>Discover 2000+ AI tools free, paid and freemium!</h2>
+                <h1>Best AI newsletters for {{ toolCategory }}</h1>
+                <h2>Industry top AI Newsletters to follow and learn!</h2>
             {% else %}
                 <h2>Discover best AI tools to stay ahead of others!</h2>
-                <h3>2000+ AI tools free, paid and freemium!</h3>
+                <h3>2000+ AI tools free, paid, and freemium!</h3>
             {% endif %}
-
         </div>
     </div>
 
     {% include items-categories.html %}
 
-
-    <!-- In below context: post is aitool , page is category -->
     <div class="row listrecent">
         {% if page.category_slug != null %}
             {% assign filtered_tools = site.items | where: "category_slug", page.category_slug %}
-
-            <!-- Separate trending and non-trending tools -->
-            {% assign trending_tools = filtered_tools | where: "trending", true %}
-            {% assign non_trending_tools = filtered_tools | reject: "trending", true %}
-            {% assign random_tools = non_trending_tools | sample: 10 %}
-
-            <!-- Include trending tools first -->
-            {% for post in trending_tools %}
-                {% if page.key != post.key %}
-                    {% include items-card.html %}
-                {% endif %}
-            {% endfor %}
-
-            <!-- Followed by 10 sample non-trending tools -->
-            {% for post in random_tools %}
-                {% if page.key != post.key %}
-                    {% include items-card.html %}
-                {% endif %}
+            
+            <!-- Display all tools, trending and non-trending combined -->
+            {% for post in filtered_tools %}
+                {% include items-card.html post=post %}
             {% endfor %}
         {% endif %}
-
     </div>
 
     <hr>
 
     {% include items-promote.html %}
-
-    {% include advertise.html %}
-
-    {% include tools.html %}
-
 </div>
-

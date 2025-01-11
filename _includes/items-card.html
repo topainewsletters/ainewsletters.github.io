@@ -12,7 +12,7 @@
                 <a class="text-highlight" href="{{ site.baseurl }}{{ post.url }}">{{ post.display_name | strip_html |
                     truncatewords:3 }}</a>
             </h2>
-            <h4 class="card-text-light">{{ post.content | strip_html | truncatewords:15 }}</h4>
+            <h4 class="card-text-light">{{ post.shortdescription | strip_html }}</h4>
         </div>
         <div class="card-footer bg-white">
             <div class="wrapfooter">

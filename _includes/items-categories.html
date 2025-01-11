@@ -1,25 +1,16 @@
 <div class="row mt-3">
     <div class="col mx-auto text-center">
         <p>
-            {% assign categories = site["categories"] | sort %}
+            {% assign categories = site["itemscategories"] | sort %}
 
             {% assign toolCategory = page.display_name %}
             {% if toolCategory != null %}
                 <a href="/" class="btn btn-info btn-icon-split btn-sm m-1">All Categories</a>
             {% endif %}
 
-            <!-- Limit categories to 3 initially -->
-            {% for cat in categories limit: 3 %}
-                {% if toolCategory != null and toolCategory == cat.display_name %}
-                    <a href="{{ cat.url }}" class="btn btn-info-dark btn-icon-split btn-sm m-1">{{ cat.display_name }}</a>
-                {% else %}
-                    <a href="{{ cat.url }}" class="btn btn-info btn-icon-split btn-sm m-1">{{ cat.display_name }}</a>
-                {% endif %}
-            {% endfor %}
-
-            <!-- Hidden categories for "Expand More" -->
-            <span id="hidden-categories" style="display: none;">
-                {% for cat in categories offset: 3 %}
+            <!-- Initial Categories (3 shown) -->
+            <span id="initial-categories">
+                {% for cat in categories limit: 5 %}
                     {% if toolCategory != null and toolCategory == cat.display_name %}
                         <a href="{{ cat.url }}" class="btn btn-info-dark btn-icon-split btn-sm m-1">{{ cat.display_name }}</a>
                     {% else %}
@@ -28,22 +19,37 @@
                 {% endfor %}
             </span>
 
-            <!-- Expand More Button -->
-            {% if categories.size > 3 %}
-                <button id="expand-more" class="btn btn-info-dark btn-sm m-1" onclick="showMoreCategories()">More Categories <i class="fas fa-angle-double-down ml-2"></i></button>
-            {% endif %}
+            <!-- Hidden Categories for "Show More" -->
+            <span id="hidden-categories" style="display: none;">
+                {% for cat in categories offset: 5 %}
+                    {% if toolCategory != null and toolCategory == cat.display_name %}
+                        <a href="{{ cat.url }}" class="btn btn-info-dark btn-icon-split btn-sm m-1">{{ cat.display_name }}</a>
+                    {% else %}
+                        <a href="{{ cat.url }}" class="btn btn-info btn-icon-split btn-sm m-1">{{ cat.display_name }}</a>
+                    {% endif %}
+                {% endfor %}
+            </span>
+
+            <!-- Expand/Collapse Buttons -->
+            <button id="toggle-categories" class="btn btn-info-dark btn-sm m-1" onclick="toggleCategories()">More Categories <i class="fas fa-angle-double-down ml-2"></i></button>
         </p>
     </div>
 </div>
 
 <script>
-    function showMoreCategories() {
+    function toggleCategories() {
         const hiddenCategories = document.getElementById('hidden-categories');
-        const expandButton = document.getElementById('expand-more');
+        const toggleButton = document.getElementById('toggle-categories');
+        const initialCategories = document.getElementById('initial-categories');
 
         if (hiddenCategories.style.display === 'none') {
             hiddenCategories.style.display = 'inline';
-            expandButton.style.display = 'none'; // Optionally hide the button after expanding
+            initialCategories.style.display = 'none';
+            toggleButton.innerHTML = 'Show Less <i class="fas fa-angle-double-up ml-2"></i>';
+        } else {
+            hiddenCategories.style.display = 'none';
+            initialCategories.style.display = 'inline';
+            toggleButton.innerHTML = 'More Categories <i class="fas fa-angle-double-down ml-2"></i>';
         }
     }
 </script>

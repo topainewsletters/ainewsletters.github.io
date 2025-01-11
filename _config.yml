@@ -12,7 +12,7 @@ include: ["_pages"]
 url: https://topainewsletters.com
 permalink: /:title/
 assetsUrl: https://assets.tipseason.com/aitools
-imagesUrl: https://assets.tipseason.com/images/aitools
+imagesUrl: /assets/images/ainewsletters/
 topic_path: ainewsletters
 
 # Authors

@@ -25,9 +25,21 @@ archive: false
 
 <div class="row mt-2">
     <div class="col-5 mt-2">
+        <div class="row">
+            <img class="img-fluid lazyimg ts-shadow-lg rounded" src="{% if page.image contains " ://" %}{{ page.image }}{%
+                else %}{{ site.imagesUrl }}/{{ page.key }}.jpg{% endif %}" alt="{{ page.title }}" />
+        </div>
 
-        <img class="img-fluid lazyimg ts-shadow-lg rounded" src="{% if page.image contains " ://" %}{{ page.image }}{%
-            else %}{{ site.imagesUrl }}/{{ page.key }}.jpg{% endif %}" alt="{{ page.title }}" />
+        <!-- <div class="row mt-5">
+            <a href="{{ page.url }}?utm_source=topainewsletters_embed" target="_blank">
+                <img src="/assets/images/topainewsletters-embed.png" alt="{{ page.title }} | topainewsletters.com"
+                    style="width: 200px; height: 54px;" width="200" height="54" />
+            </a>
+
+
+            <a href="#" class="m-3 text-primary"><i class="fas fa-copy"></i> Copy embed code</a>
+        </div> -->
+        
 
     </div>
     <div class="col-6 ml-4">
@@ -38,17 +50,18 @@ archive: false
 
             {% if page.dofollow == true %}
 
-                <!-- ************* LOOKING FOR HIGH QUALITY DO FOLLOW LINK ? CONTACT US! ************* -->
-                <a href="{{ page.website }}?ref=tipseason.com&utm_source=tipseason.com"
-                    target="_blank" class="btn btn-info btn-sm">Visit Website
-                    &nbsp;&nbsp;<i class="fas fa-external-link-alt"></i>
-                </a>
+            <!-- ************* LOOKING FOR HIGH QUALITY DO FOLLOW LINK ? CONTACT US! ************* -->
+            <a href="{{ page.website }}?ref=top.com&utm_source=topainewsletters.com" target="_blank"
+                class="btn btn-info btn-sm">Visit Website
+                &nbsp;&nbsp;<i class="fas fa-external-link-alt"></i>
+            </a>
             {% else %}
-                <!-- ************* LOOKING FOR HIGH QUALITY DO FOLLOW LINK ? CONTACT US! ************* -->
-                <a rel="noopener noreferrer nofollow" href="{{ page.website }}?ref=tipseason.com&utm_source=tipseason.com"
-                    target="_blank" class="btn btn-info btn-sm">Visit Website
-                    &nbsp;&nbsp;<i class="fas fa-external-link-alt"></i>
-                </a>
+            <!-- ************* LOOKING FOR HIGH QUALITY DO FOLLOW LINK ? CONTACT US! ************* -->
+            <a rel="noopener noreferrer nofollow"
+                href="{{ page.website }}?ref=topainewsletters.com&utm_source=topainewsletters.com" target="_blank"
+                class="btn btn-info btn-sm">Visit Website
+                &nbsp;&nbsp;<i class="fas fa-external-link-alt"></i>
+            </a>
             {% endif %}
 
 
@@ -56,18 +69,23 @@ archive: false
 
         <p>{{ content }}</p>
 
-        <p>One of the best trending AI tools for {{ page.category }} </p>
+        <p>One of the best trending AI newsletters for {{ page.category }} </p>
 
         <hr>
 
         <p>
-        <p>Category: </p>
-        <a href="/category/{{ page.category_slug }}" class="btn btn-primary btn-icon-split btn-sm">
-            <span class="icon text-white-50">
-                <i class="fas fa-tags"></i>
-            </span>
-            <span class="text">{{ page.category }}</span>
-        </a>
+            <p>Categories: </p>
+            {% for slug in page.category_slug %}
+                {% assign category = site.itemscategories | where: "category_slug", slug | first %}
+                {% if category %}
+                    <a href="/category/{{ category.category_slug }}" class="btn btn-primary btn-icon-split btn-sm">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-tags"></i>
+                        </span>
+                        <span class="text">{{ category.display_name }}</span>
+                    </a>
+                {% endif %}
+            {% endfor %}
         </p>
 
         <p>
@@ -76,9 +94,10 @@ archive: false
             <span class="icon text-white-50">
                 <i class="fas fa-check"></i>
             </span>
-            <span class="text">Freemium</span>
+            <span class="text">Free</span>
         </a>
         </p>
+
 
     </div>
 </div>
