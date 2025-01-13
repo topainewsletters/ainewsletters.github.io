@@ -1,6 +1,6 @@
 ---
 layout: items
-title: Top and best newsletters for AI and Machine Learning to follow
+title: Best newsletters for AI and Machine Learning
 display_name: AI and Machine Learning
 category_slug: ai-machine-learning
 ---
